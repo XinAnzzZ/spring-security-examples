@@ -1,10 +1,14 @@
 package com.yuhangma.spring.security.examples.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * 安全配置器
@@ -63,9 +67,33 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/", "/index").permitAll()
+                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
-                .and().formLogin().defaultSuccessUrl("/user/index").permitAll()
-                .and().logout().permitAll()
-                .and().csrf().disable();
+                .and().formLogin().defaultSuccessUrl("/index").permitAll()
+                .and().logout().permitAll();
+    }
+
+    /**
+     * 在内存中创建两个用户。参见父类方法的注释内容。
+     *
+     * @see WebSecurityConfigurerAdapter#configure(AuthenticationManagerBuilder)
+     */
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("the_username").password("the_password").roles("USER")
+                .and().withUser("admin").password("admin").roles("ADMIN");
+    }
+
+    /**
+     * 密码加密器。
+     * <p>
+     * {@link NoOpPasswordEncoder} 是对密码进行明文处理，在 Spring Security 5.x 之后，强制要求密码要进行加密处理，
+     * 所以这个类已经被标识为过期，本项目主要为了演示认证流程，故密码使用明文处理。之后的项目全部使用密文。
+     */
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
     }
 }
