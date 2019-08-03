@@ -1,0 +1,10 @@
+server:
+  port: 8882
+
+spring:
+  # 数据库相关配置，请自行修改为自己的 mysql
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://118.25.144.92:3306/spring_security_examples?useSSL=false
+    username: root
+    password:

@@ -10,17 +10,16 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>spring-security-examples-01-basic</artifactId>
+    <artifactId>spring-security-examples-02-basic-db</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>01-basic</name>
-    <description>Demo project for Spring Boot</description>
+    <name>02-basic-db</name>
+    <description>Spring Security 示例项目 -- 使用 db 版本</description>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
-
     </dependencies>
 
     <build>

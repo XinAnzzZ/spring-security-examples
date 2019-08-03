@@ -6,25 +6,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
 
 /**
  * @author Moore
- * @since 2019-08-01
+ * @since 2019-08-03
  */
 @Entity
 @Data
-public class User {
+public class UserRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
-    private String username;
+    private Integer userId;
 
-    private String password;
-
-    private Date updated;
-
-    private Date created;
+    private String roleName;
 }
