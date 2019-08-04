@@ -27,6 +27,7 @@
     <modules>
         <module>01-basic</module>
         <module>02-basic-db</module>
+        <module>service</module>
         <module>common</module>
     </modules>
 
