@@ -1,11 +1,10 @@
 package com.yuhangma.spring.security.examples.common.entity.model;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.Date;
 
 /**
@@ -14,11 +13,9 @@ import java.util.Date;
  */
 @Entity
 @Data
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+@DynamicInsert
+@DynamicUpdate
+public class User extends AbstractModel {
 
     private String username;
 

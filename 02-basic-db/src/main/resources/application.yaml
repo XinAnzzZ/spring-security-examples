@@ -8,3 +8,7 @@ spring:
     url: jdbc:mysql://118.25.144.92:3306/spring_security_examples?useSSL=false
     username: root
     password:
+
+  jpa:
+    show-sql: true
+    open-in-view: true

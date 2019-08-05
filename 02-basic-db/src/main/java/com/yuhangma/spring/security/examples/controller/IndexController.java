@@ -18,11 +18,11 @@ public class IndexController {
 
     @GetMapping("user/index")
     public ResultJson userIndex() {
-        return ResultJson.msg("This is user index, only have a USER role or ADMIN role to access! ");
+        return ResultJson.msg("This is user interface, only have a USER role or ADMIN role to access! ");
     }
 
     @GetMapping("admin/index")
     public ResultJson adminIndex() {
-        return ResultJson.msg("This is admin index, only have a ADMIN role to access! ");
+        return ResultJson.msg("This is admin interface, only have a ADMIN role to access! ");
     }
 }

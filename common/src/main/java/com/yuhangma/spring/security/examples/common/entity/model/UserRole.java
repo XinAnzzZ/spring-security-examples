@@ -1,6 +1,8 @@
 package com.yuhangma.spring.security.examples.common.entity.model;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,13 +15,15 @@ import javax.persistence.Id;
  */
 @Entity
 @Data
+@DynamicInsert
+@DynamicUpdate
 public class UserRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Integer userId;
+    private Long userId;
 
     private String roleName;
 }

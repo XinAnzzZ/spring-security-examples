@@ -1,23 +1,21 @@
 package com.yuhangma.spring.security.examples.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 /**
  * @author Moore
  * @since 2019-08-01
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@SuppressWarnings("unused")
 public class ResultJson<T> {
 
-    private Integer code = OK;
+    @NonNull
+    private Integer code;
 
-    private String msg = SUCCESS;
+    @NonNull
+    private String msg;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
@@ -26,35 +24,26 @@ public class ResultJson<T> {
 
     public static final int OK = 200;
 
-    public static <R> ResultJson<R> ok(R data) {
-        return new ResultJson<>(OK, SUCCESS, data);
+    private ResultJson(Integer code, String msg) {
+        this.code = code;
+        this.msg = msg;
     }
 
     public static ResultJson ok() {
-        return new ResultJson();
+        return new ResultJson(OK, SUCCESS);
     }
 
-    public static <R> ResultJson<R> ok(String msg, R data) {
-        return new ResultJson<>(OK, msg, data);
-    }
-
-    public static ResultJson fail(String msg) {
-        ResultJson resultJson = new ResultJson();
-        resultJson.setCode(400);
-        resultJson.setMsg(msg);
-        return resultJson;
-    }
-
-    public static ResultJson fail() {
-        ResultJson resultJson = new ResultJson();
-        resultJson.setCode(400);
-        resultJson.setMsg("UNKNOWN ERROR!");
+    public static <R> ResultJson<R> ok(R data) {
+        ResultJson<R> resultJson = new ResultJson<>(OK, SUCCESS);
+        resultJson.setData(data);
         return resultJson;
     }
 
     public static ResultJson msg(String msg) {
-        ResultJson resultJson = new ResultJson();
-        resultJson.setMsg(msg);
-        return resultJson;
+        return new ResultJson(OK, msg);
+    }
+
+    public static ResultJson fail(int code, String message) {
+        return new ResultJson(code, message);
     }
 }
