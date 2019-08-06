@@ -37,5 +37,5 @@ VALUES ('admin02', 'admin'),
        ('user02', 'user');
 
 INSERT INTO user_role(user_id, role_name)
-VALUES ((SELECT id FROM user WHERE user.username = 'admin02'), 'ADMIN'),
-       ((SELECT id FROM user WHERE user.username = 'user02'), 'USER')
+VALUES ((SELECT id FROM user WHERE user.username = 'admin02'), 'ROLE_ADMIN'),
+       ((SELECT id FROM user WHERE user.username = 'user02'), 'ROLE_USER')
